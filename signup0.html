@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="loginstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <style>
+        /* Add custom styles for the alignment and dropdown size */
+        .input, .radio, .select-role {
+            margin: 15px 0;
+        }
+        .radio {
+            display: flex;
+            gap: 15px; /* Adjust spacing between radio buttons */
+            align-items: center;
+        }
+        .select-role {
+            display: flex;
+            align-items: center;
+        }
+        .select-role label {
+            margin-right: 10px; /* Adjust label margin */
+        }
+        /* Adjust size of the dropdown menu */
+        .select-role select {
+            width: 150px; /* Set width */
+            height: 35px;  /* Set height */
+            padding: 5px; /* Adjust padding */
+            font-size: 14px; /* Adjust font size */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="regform">
+            <!-- Action points to welcome.html page, you can change it to any page you want -->
+            <form id="loginForm" method="post">
+                <p class="logo">Donate <b style="color: #06C167;">Food</b></p>
+                
+                <p id="heading">Create your account</p>
+                
+                <!-- Username Field -->
+                <div class="input">
+                    <label class="textlabel" for="name">User name</label><br>
+                    <input type="text" id="name" name="name" required/>
+                </div>
+
+                <!-- Email Field -->
+                <div class="input">
+                    <label class="textlabel" for="email">Email</label>
+                    <input type="email" id="email" name="email" required/>
+                </div>
+
+                <!-- Password Field -->
+                <label class="textlabel" for="password">Password</label>
+                <div class="password">
+                    <input type="password" name="password" id="password" required/>
+                    <i class="uil uil-eye-slash showHidePw" id="showpassword"></i> 
+                </div>
+
+                <!-- Gender Field -->
+                <div class="radio">
+                    <input type="radio" name="gender" id="male" value="male" required/>
+                    <label for="male">Male</label>
+                    <input type="radio" name="gender" id="female" value="female">
+                    <label for="female">Female</label>
+                </div>
+
+                <!-- Role Selection -->
+                <div class="select-role">
+                    <label for="role">Select Role:</label>
+                    <select id="role" name="role">
+                      <option value="donor">Donor</option>
+                      <option value="delivery">Delivery</option>
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="btn">
+                    <button type="submit" name="sign">Continue</button>
+                </div>
+                
+                <!-- Sign in link -->
+                <div class="signin-up">
+                    <p style="font-size: 20px; text-align: center;">Already have an account? <a href="login_.html"> Sign in</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        // JavaScript to handle form submission based on role selection
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get the selected role value
+            var selectedRole = document.getElementById("role").value;
+
+            // Redirect based on the selected role
+            if (selectedRole === "donor") {
+                window.location.href = "donatefood.html"; // Replace with the Donor page URL
+            } else if (selectedRole === "delivery") {
+                window.location.href = "myorders.html"; // Replace with the Delivery page URL
+            }
+        });
+    </script>
+    <script src="admin/login.js"></script>
+</body>
+</html>

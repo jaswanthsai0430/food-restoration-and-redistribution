@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="loginstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <style>
+      /* Add custom styles for the form and dropdown size */
+      .input, .select-role {
+          margin: 15px 0;
+      }
+
+      /* Adjust size of the dropdown menu */
+      select {
+          width: 150px; /* Set width */
+          height: 35px;  /* Set height */
+          font-size: 14px; /* Adjust font size */
+          padding: 5px; /* Adjust padding */
+          border: 1px solid #ccc; /* Add border */
+          border-radius: 5px; /* Slightly round the corners */
+      }
+  </style>
+</head>
+<body>
+    <div class="container">
+        <div class="regform">
+            <!-- Action points to welcome.html page, you can change it to any page you want -->
+            <form id="loginForm" method="post">
+                <p class="logo">Donate <b style="color: #06C167;">Food</b></p>
+                
+                <p id="heading">Login</p>
+                
+                <!-- Username Field -->
+                <div class="input">
+                    <label class="textlabel" for="name">User name</label><br>
+                    <input type="text" id="name" name="name" required/>
+                </div>
+
+                <!-- Email Field -->
+                <div class="input">
+                    <label class="textlabel" for="email">Email</label>
+                    <input type="email" id="email" name="email" required/>
+                </div>
+
+                <!-- Password Field -->
+                <label class="textlabel" for="password">Password</label>
+                <div class="password">
+                    <input type="password" name="password" id="password" required/>
+                    <i class="uil uil-eye-slash showHidePw" id="showpassword"></i> 
+                </div>
+
+                <!-- Role Selection -->
+                <label for="role">Select Role:</label>
+                <select id="role" name="role">
+                  <option value="donor">Donor</option>
+                  <option value="delivery">Delivery</option>
+                </select>
+
+                <!-- Submit Button -->
+                <div class="btn">
+                    <button type="submit" name="sign">Login</button>
+                </div>
+                
+                <!-- Sign in link -->
+                <div class="signin-up">
+                    <p style="font-size: 20px; text-align: center;">Not a member? <a href="signup0.php"> Sign up</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        // JavaScript to handle form submission based on role selection
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get the selected role value
+            var selectedRole = document.getElementById("role").value;
+
+            // Redirect based on the selected role
+            if (selectedRole === "donor") {
+                window.location.href = "donatefood.php"; // Replace with the Donor page URL
+            } else if (selectedRole === "delivery") {
+                window.location.href = "myorders.php"; // Replace with the Delivery page URL
+            }
+        });
+    </script>
+</body>
+</html>

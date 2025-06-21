@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Food</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+            background-color: #00cc66;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .form-wrapper {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-section {
+            width: 100%;
+            max-width: 48%;
+            background-color: #f3f3f3;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Centering the Donate Food title */
+        .logo {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .logo b {
+            color: #06C167;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="email"], input[type="number"], select {
+            width: 50%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .meal-type {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .meal-type label {
+            margin-right: 10px;
+        }
+
+        .food-category {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .category {
+            position: relative;
+            width: 70%;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .category img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .category.active {
+            border: 2px solid #00cc66;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #14201b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .submit-button:hover {
+            background-color: #00b359;
+        }
+
+        @media screen and (max-width: 100000px) {
+            .form-section {
+                max-width: 100%;
+            }
+
+            .meal-type {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="form-wrapper">
+        <!-- Left side: Food details form -->
+        <div class="form-section">
+            <!-- Centered Donate Food logo -->
+            <div class="logo">Donate <b>Food</b></div>
+
+            <!-- Form starts here -->
+            <form id="donate-form" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="food-name">Food Name:</label>
+                    <input type="text" id="food-name" name="food-name" required>
+                </div>
+
+                <div class="meal-type">
+                    <label for="meal-type">Meal Type:</label>
+                    <label><input type="radio" name="meal-type" value="veg" required> Veg</label>
+                    <label><input type="radio" name="meal-type" value="non-veg"> Non-veg</label>
+                </div>
+
+                <div class="form-group">
+                    <label>Select the Category:</label>
+                    <div class="food-category">
+                        <div class="category" id="raw-food" onclick="selectCategory(this)">
+                            <img src="img\raw-food.png" alt="Raw Food">
+                            <p>Raw Food</p>
+                        </div>
+                        <div class="category" id="cooked-food" onclick="selectCategory(this)">
+                            <img src="img\cooked-food.png" alt="Cooked Food">
+                            <p>Cooked Food</p>
+                        </div>
+                        <div class="category" id="packed-food" onclick="selectCategory(this)">
+                            <img src="img\packed-food.png" alt="Packed Food">
+                            <p>Packed Food</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantity">Quantity (persons):</label>
+                        <input type="number" id="quantity" name="quantity" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone No:</label>
+                        <input type="text" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="district">District:</label>
+                        <select id="district" name="district">
+                            <option value="Visakhapatnam">Visakhapatnam</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
+
+                    <button type="submit" class="submit-button">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function selectCategory(categoryElement) {
+        // Remove active class from all categories
+        document.querySelectorAll('.category').forEach(function(el) {
+            el.classList.remove('active');
+        });
+
+        // Add active class to the clicked category
+        categoryElement.classList.add('active');
+    }
+
+    function handleFormSubmit(event) {
+        event.preventDefault(); // Prevent form submission
+        
+        // Redirect to another page
+        window.location.href = "delivery.php"; // Redirect to the new page after submitting
+    }
+</script>
+
+</body>
+</html>
